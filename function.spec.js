@@ -27,7 +27,7 @@ describe ("проверка реализовнных методов", function()
         ], callbackForFind)).to.deep.equal(3);
     })
 
-    it ('единого значения на основе всего массива = 18 с помощью метода reduce', function () {
+    it ('единоe значениe на основе всего массива = 18 с помощью метода reduce', function () {
         expect(forMethodReduce([2, 4, 0, 3, 9], callbackReduce)).to.deep.equal(18);
     })
 })
