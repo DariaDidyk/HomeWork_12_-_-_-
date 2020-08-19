@@ -1,4 +1,4 @@
-describe ("проверка реализовнных методов", function() {
+describe ("проверка реализовaнных методов", function() {
     it ('создаем новый массив с помощью метода forEach', function () {
         expect(forMethodForEach(['a', 'b', 'c'], callbackMethodForEach)).to.deep.equal(['a', 'b', 'c'])
     })
