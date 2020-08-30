@@ -2,19 +2,21 @@
 
 // Функции должны принимать перебираемый массив и колбэк.
 
-// forEach(arr, cb)
+// // forEach(arr, cb)
 
 const example = ['a', 'b', 'c'];
 const resultExample = [];
 
-function callbackMethodForEach (arr) {
-    arr.forEach(function(item) {
-        resultExample.push(item)
-    })
-    return resultExample
+function callbackMethodForEach(arr) {
+    for (const item of arr) {
+        resultExample.push(item);
+    }
+    console.log(resultExample)
+    return resultExample;
 }
 
 function forMethodForEach(arr, callback) {
+    
     return callback(arr);
 }
 
@@ -22,15 +24,15 @@ function forMethodForEach(arr, callback) {
 console.log(example, resultExample);
 
 
-// map(arr, cb)
+// // // // map(arr, cb)
 
 let arrayForMap = ['alel', 'babel', 'lalala'];
 let emptyArray = [];
 
 function callbackForMap(arr) {
-    arr.map(function (item) {
+    for (const item of arr) {
         emptyArray.push(item.toUpperCase());
-    })
+    }
     return emptyArray;
 }
 
@@ -38,20 +40,20 @@ function forMethodMap(arr, callback) {
     return callback(arr)
 }
 
-// forMethodMap(arrayForMap, callbackForMap);
+forMethodMap(arrayForMap, callbackForMap);
 console.log(emptyArray);
 
-// filter(arr, cb)
+// // // filter(arr, cb)
 
 const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 const result = [];
 
 function callbackForFilter(arr) {
-    arr.filter(function(item) {
+    for (const item of arr) {
         if (item.length > 7) {
             result.push(item);
         }
-    }) 
+    }
     return result;
 }
 
@@ -62,15 +64,18 @@ function forMethodFilter(arr, callback) {
 forMethodFilter(words, callbackForFilter);
 console.log(result);
 
-// some(arr, cb)
+// // // some(arr, cb)
 
 const numbers = [9, 20, 33, 14, 15];
 
 function callbackForSome (arr) {
-    return arr.some(function (item) {
-        return item > 20;
-    })
+    for (const item of arr) {
+        if (item > 20) {
+            return true;
+        }
+    }
 }
+
 function forMethodSome(arr, callback) {
     return callback(arr);
 }
@@ -78,15 +83,22 @@ function forMethodSome(arr, callback) {
 forMethodSome(numbers, callbackForSome);
 console.log(forMethodSome(numbers, callbackForSome));
 
-// every(arr, cb)
+// // // every(arr, cb)
 
 const arrayForEvery = ['exuberant', 'destruction', 'present'];
 
 function callbackForEvery(arr) {
-    return arr.every(function(item) {
-        return item.length < 5;
-    }
-)}
+    let includesAll
+    for (const item of arr) {
+        if (item.length < 5) {
+            includesAll =  true;
+        } else {
+            includesAll = false;
+            return false;
+        } 
+    }   
+    return includesAll
+}
 
 function forMethorEvery(arr, callback) {
     return callback(arr);
@@ -94,8 +106,7 @@ function forMethorEvery(arr, callback) {
 forMethorEvery(arrayForEvery, callbackForEvery);
 console.log(forMethorEvery(arrayForEvery, callbackForEvery));
 
-
-// find(arr, cb)
+// // // find(arr, cb)
 
 let users = [
     {id: 1, name: "Вася"},
@@ -103,11 +114,18 @@ let users = [
     {id: 3, name: "Маша"}
 ];
 
-const callbackForFind = (arr) => {
-    const obj = arr.find(function(item) {
-        return item.id === 3;
-    })
-    return obj.id;
+function callbackForFind (arr) {
+    let findedObject;
+    for (const item of arr) {
+        if (typeof item === 'object') {
+            for (const key in item) {
+                if (item.id === 3) {
+                    findedObject = item;
+                } 
+            }
+        } 
+    }
+    return findedObject.id;
 }
 
 const forMethodFind = (arr, callback) => {
@@ -116,18 +134,21 @@ const forMethodFind = (arr, callback) => {
 forMethodFind(users, callbackForFind);
 console.log(forMethodFind(users, callbackForFind));
 
-// reduce(arr, cb)
+// // reduce(arr, cb)
 
 const numbersArr = [2, 4, 0, 3, 9];
-const callbackReduce = (arr) => {
-    return arr.reduce(function (sum, item) {
-        return sum + item;
-    }, 0)
-    
+
+function callbackReduce (arr) {
+    let sum = 0;
+    for (const item of arr) {
+        console.log(item);
+        sum = sum + item;
+    }
+    return sum;
 }
 
 function forMethodReduce(arr, callback) {
     return callback(arr);
 }
-callbackReduce(numbersArr, forMethodReduce);
+// callbackReduce(numbersArr, forMethodReduce);
 console.log(callbackReduce(numbersArr, forMethodReduce));
